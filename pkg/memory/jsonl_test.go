@@ -1121,7 +1121,10 @@ func TestStore_SetsCreatedAtWhenNil(t *testing.T) {
 					t.Errorf("message %d CreatedAt is zero — not set by %s", i, op.name)
 				}
 				if history[i].CreatedAt.Before(before) || history[i].CreatedAt.After(after) {
-					t.Errorf("message %d CreatedAt %v outside expected window [%v, %v]", i, history[i].CreatedAt, before, after)
+					t.Errorf(
+						"message %d CreatedAt %v outside expected window [%v, %v]",
+						i, history[i].CreatedAt, before, after,
+					)
 				}
 			}
 		})
@@ -1182,7 +1185,10 @@ func TestStore_PreservesExistingCreatedAt(t *testing.T) {
 			}
 			for i, want := range op.wantTimes {
 				if history[i].CreatedAt == nil || !history[i].CreatedAt.Equal(want) {
-					t.Errorf("message %d CreatedAt = %v, want %v (should preserve caller-provided time)", i, history[i].CreatedAt, want)
+					t.Errorf(
+						"message %d CreatedAt = %v, want %v (should preserve caller-provided time)",
+						i, history[i].CreatedAt, want,
+					)
 				}
 			}
 		})
